@@ -1,3 +1,10 @@
+
+//
+// SecSign ID Api ASP.NET / C#
+//
+// (c) 2014 SecSign Technologies Inc.
+//
+
 using System;
 using System.Collections;
 using System.ComponentModel;

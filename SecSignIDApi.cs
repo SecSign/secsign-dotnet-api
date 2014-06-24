@@ -1,5 +1,10 @@
-// $Id: SecSignIDApi.cs,v 1.1 2014/04/25 13:47:20 titus Exp $
-// $Source: /cvsroot/SecCommerceDev/seccommerce/secsignerid/dotnet/SecSignIDApi/SecSignIDApi.cs,v $
+// $Id: SecSignIDApi.cs,v 1.2 2014/05/28 15:10:23 titus Exp $
+
+//
+// SecSign ID Api ASP.NET / C#
+//
+// (c) 2014 SecSign Technologies Inc.
+//
 
 using System;
 using System.Collections.Generic;
@@ -252,7 +257,7 @@ namespace SecSignID
 		/// <summary>
 		/// cvs revision number
 		/// </summary>
-		private string revisionString = "$Revision: 1.1 $";
+		private string revisionString = "$Revision: 1.2 $";
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SecSignID.SecSignIDApi"/> class.
