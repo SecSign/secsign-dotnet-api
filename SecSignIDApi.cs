@@ -1,4 +1,4 @@
-// $Id: SecSignIDApi.cs,v 1.2 2014/05/28 15:10:23 titus Exp $
+// $Id: SecSignIDApi.cs,v 1.3 2015/01/06 17:19:56 titus Exp $
 
 //
 // SecSign ID Api ASP.NET / C#
@@ -257,7 +257,7 @@ namespace SecSignID
 		/// <summary>
 		/// cvs revision number
 		/// </summary>
-		private string revisionString = "$Revision: 1.2 $";
+		private string revisionString = "$Revision: 1.3 $";
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SecSignID.SecSignIDApi"/> class.
@@ -267,7 +267,8 @@ namespace SecSignID
 			int firstSpace = this.revisionString.IndexOf(' ');
 			int lastSpace = this.revisionString.LastIndexOf(' ');
 			this.version = this.revisionString.Substring(firstSpace, lastSpace-firstSpace).Trim();
-			this.referer = this.GetType().Name.ToString() + "_.NET";
+			//this.referer = this.GetType().Name.ToString() + "_.NET";
+			this.referer = "SecSignIDApi_.NET";
 		}
 		
 		/// <summary>
