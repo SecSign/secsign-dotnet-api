@@ -81,7 +81,7 @@ namespace WebExample
 			try
 			{
 				secSignIDApi = new SecSignIDApi();
-				authSession = secSignIDApi.RequestAuthSession(secsignidString, "ASP.NET example how to use SecSignIDApi", "localhost");
+				authSession = secSignIDApi.RequestAuthSession(secsignidString, "ASP.NET example how to use SecSignIDApi", Request.Url.Authority);
 
 				// set all values
 				this.secsignid.Value 		= authSession.GetSecSignID();

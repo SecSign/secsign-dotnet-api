@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="WebExample.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SecSignID.aspx.cs">
+    <Files>
+      <File FileName="SecSignID.aspx.cs" Line="129" Column="13" />
+      <File FileName="web.config" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

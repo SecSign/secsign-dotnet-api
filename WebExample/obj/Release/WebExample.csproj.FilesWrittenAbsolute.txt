@@ -1,0 +1,3 @@
+/Users/titus/SecCommerce/NewBuild/SecSign-Interfaces/secsign-dotnet-api/WebExample/bin/WebExample.dll
+/Users/titus/SecCommerce/NewBuild/SecSign-Interfaces/secsign-dotnet-api/WebExample/obj/Release/WebExample.dll
+/Users/titus/SecCommerce/NewBuild/SecSign-Interfaces/secsign-dotnet-api/WebExample/bin/SecSignIDApi.dll
