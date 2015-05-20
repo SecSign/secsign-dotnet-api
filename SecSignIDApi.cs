@@ -1,4 +1,4 @@
-// $Id: SecSignIDApi.cs,v 1.3 2015/01/06 17:19:56 titus Exp $
+// $Id: SecSignIDApi.cs,v 1.4 2015/05/15 13:53:29 titus Exp $
 
 //
 // SecSign ID Api ASP.NET / C#
@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
+using System.Reflection;
+
+[assembly: AssemblyVersion("1.0.2")]
 
 namespace SecSignID
 {
@@ -257,7 +260,7 @@ namespace SecSignID
 		/// <summary>
 		/// cvs revision number
 		/// </summary>
-		private string revisionString = "$Revision: 1.3 $";
+		private string revisionString = "$Revision: 1.4 $";
 		
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SecSignID.SecSignIDApi"/> class.
@@ -358,9 +361,10 @@ namespace SecSignID
 			}
 			
 			Dictionary<string, string> parameterList = new Dictionary<string, string>();
-			
+
+			fillParameterArray(parameterList);
+
 			parameterList.Add("request", "ReqGetAuthSessionState");
-			
 			parameterList.Add("secsignid", authSession.GetSecSignID());
 			parameterList.Add("authsessionid", authSession.GetAuthSessionID());
 			parameterList.Add("requestid", authSession.GetRequestID());
@@ -395,9 +399,10 @@ namespace SecSignID
 			}
 			
 			Dictionary<string, string> parameterList = new Dictionary<string, string>();
-			
+
+			fillParameterArray(parameterList);
+
 			parameterList.Add("request", "ReqCancelAuthSession");
-			
 			parameterList.Add("secsignid", authSession.GetSecSignID());
 			parameterList.Add("authsessionid", authSession.GetAuthSessionID());
 			parameterList.Add("requestid", authSession.GetRequestID());
@@ -431,9 +436,10 @@ namespace SecSignID
 			}
 			
 			Dictionary<string, string> parameterList = new Dictionary<string, string>();
-			
+
+			fillParameterArray(parameterList);
+
 			parameterList.Add("request", "ReqReleaseAuthSession");
-			
 			parameterList.Add("secsignid", authSession.GetSecSignID());
 			parameterList.Add("authsessionid", authSession.GetAuthSessionID());
 			parameterList.Add("requestid", authSession.GetRequestID());
