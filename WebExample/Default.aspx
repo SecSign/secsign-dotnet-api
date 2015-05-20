@@ -6,7 +6,7 @@
 //
 // SecSign ID Api ASP.NET / C#
 //
-// (c) 2014 SecSign Technologies Inc.
+// (c) 2014, 2015 SecSign Technologies Inc.
 //
 
 -->
@@ -24,7 +24,7 @@
 			Display='dynamic'
             ControlToValidate="secsignid" 
             ErrorMessage="SecSign ID contains illegal characters."
-            ValidationExpression="^[\w-_@]+$">&nbsp; <!-- do not display anything in front of label secsign id -->
+            ValidationExpression="^[\w\-_@.]+$">&nbsp; <!-- do not display anything in front of label secsign id -->
 		</asp:RegularExpressionValidator>
 		<asp:ValidationSummary runat='server' HeaderText="An error occured: " />
 		<asp:RequiredFieldValidator runat='server'
