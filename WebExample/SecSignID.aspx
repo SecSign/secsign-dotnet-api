@@ -45,10 +45,10 @@
 			</tr>
 			<tr>
 				<td align='left'>
-					<asp:button type ='submit' name='cancel' id='cancel' value='1' style='width:100px' runat='server' Text='Cancel' />
+					<asp:button type ='submit' name='cancelauthsession' id='cancelauthsession' value='1' style='width:100px' runat='server' Text='Cancel' />
 				</td>
 				<td align='right'>
-					<asp:button type ='submit' name='check' id='check' value='1' style='width:100px' runat='server' Text='OK' />
+					<asp:button type ='submit' name='checkauthsession' id='checkauthsession' value='1' style='width:100px' runat='server' Text='OK' />
 				</td>
 			</tr>
 		</table>

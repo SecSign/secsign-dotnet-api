@@ -31,8 +31,8 @@ namespace WebExample {
 		
 		protected System.Web.UI.HtmlControls.HtmlImage authSessionIconDisplay;
 		
-		protected System.Web.UI.WebControls.Button cancel;
+		protected System.Web.UI.WebControls.Button cancelauthsession;
 		
-		protected System.Web.UI.WebControls.Button check;
+		protected System.Web.UI.WebControls.Button checkauthsession;
 	}
 }

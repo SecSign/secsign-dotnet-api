@@ -47,18 +47,18 @@ namespace WebExample
 					// form send form back to server
 					// get post data and decide whether go back when cancel has been clicked or to check ticket
 					NameValueCollection form = Request.Form;
-					if (!string.IsNullOrEmpty(form["cancel"]))
+					if (!string.IsNullOrEmpty(form["cancelauthsession"]))
 					{
-						//string cancelValue = form["cancel"];
+						//string cancelValue = form["cancelauthsession"];
 						//if(cancelValue.Equals("1")) // <- asp sets its own values which are equal to Text-attribute
 						{
 							this.cancelLoginProcess();
 							return;
 						}
 					}
-					else if (!string.IsNullOrEmpty(form["check"]))
+					else if (!string.IsNullOrEmpty(form["checkauthsession"]))
 					{
-						//string checkValue = form["check"];
+						//string checkValue = form["checkauthsession"];
 						//if(checkValue.Equals("1"))
 						{
 							this.checkAuthSessionState();
@@ -89,7 +89,8 @@ namespace WebExample
 				this.requestid.Value   		= authSession.GetRequestID();
 				this.servicename.Value   	= authSession.GetRequestingService();
 				this.serviceaddress.Value   = authSession.GetRequestingServiceAddress();
-				
+				this.authsessionicondata.Value = authSession.GetIconData();
+
 				this.authSessionIconDisplay.Src = "data:image/png;base64," + authSession.GetIconData();
 				this.authSessionIconDisplay.Alt = "SecSign ID Access Pass Icon";
 			}
@@ -135,7 +136,7 @@ namespace WebExample
 					Response.Redirect("Intern.aspx?secsignid=" + authSession.GetSecSignID());
 				}
 				else if(authSessionState == AuthSession.PENDING || authSessionState == AuthSession.FETCHED){
-					this.lblMessage.Text = "the auth session is still pending... it has neither be accepted nor denied.";
+					this.lblMessage.Text = "The auth session is still pending... it has neither be accepted nor denied.";
 				}
 				else
 				{
