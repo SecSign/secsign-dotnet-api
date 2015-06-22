@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SecSignIDApi</name>
+    </assembly>
+    <members>
+        <member name="T:SecSignID.SecSignIDApi">
+            <summary>
+            Class to connect to a SecSign ID server and request authentication sessions and status.
+            </summary>
+        </member>
+        <member name="F:SecSignID.SecSignIDApi.secSignIDServer">
+            <summary>
+            The secsign id server.
+            </summary>
+        </member>
+        <member name="F:SecSignID.SecSignIDApi.secSignIDServerPort">
+            <summary>
+            The secsign id server port.
+            </summary>
+        </member>
+        <member name="F:SecSignID.SecSignIDApi.secSignIDServerFallback">
+            <summary>
+            a fallback secsign id server
+            </summary>
+        </member>
+        <member name="F:SecSignID.SecSignIDApi.secSignIDServerPortFallback">
+            <summary>
+            port of the fallback secsign id server.
+            </summary>
+        </member>
+        <member name="F:SecSignID.SecSignIDApi.referer">
+            <summary>
+            The referer which is send to server.
+            </summary>
+        </member>
+        <member name="F:SecSignID.SecSignIDApi.pluginName">
+            <summary>
+            an optional plugin name.
+            </summary>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SecSignID.SecSignIDApi" /> class.
+            </summary>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.SetPluginName(System.String)">
+            <summary>
+            Sets an optional and additional name of the plugin.
+            </summary>
+            <param name="pluginName">
+            Plugin name.
+            </param>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.fillParameterArray(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Fills the parameter list with all mandatory parameter and their values.
+            </summary>
+            <param name="parameterList">
+            Parameter list.
+            </param>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.RequestAuthSession(System.String,System.String,System.String)">
+            <summary>
+            Requests the authsession to login.
+            </summary>
+            <returns>
+            The authsession to login.
+            </returns>
+            <param name="secsignid">the secsign id the auth session shall be created for.</param>
+            <param name="serviceName">Service name which is displayed at users smartphone.</param>
+            <param name="serviceAddress">Service address which is displayed at users smartphone.</param>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.GetAuthSessionState(SecSignID.AuthSession)">
+            <summary>
+            Gets the authentication session state for a certain secsign id whether the authentication session is still pending or it was accepted or denied.
+            </summary>
+            <returns>The auth session state.</returns>
+            <param name="authSession">AuthSession.</param>
+            <exception cref="T:System.ArgumentException">
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.CancelAuthSession(SecSignID.AuthSession)">
+            <summary>
+            Cancel the given auth session
+            </summary>
+            <returns>
+            the auth session state after it has been canceled.
+            </returns>
+            <param name="authSession">AuthSession.</param>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.ReleaseAuthSession(SecSignID.AuthSession)">
+            <summary>
+            Releases an authentication session if it was accepted and not used any longer
+            </summary>
+            <returns>
+            the auth session state after it has been released.
+            </returns>
+            <param name="authSession">AuthSession.</param>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.SendRequest(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Actually a request is build and send to server.
+            </summary>
+            <returns>response of the server.</returns>
+            <param name="parameterList">parameter list which will be url encoded.</param>
+        </member>
+        <member name="M:SecSignID.SecSignIDApi.CheckResponse(System.String)">
+            <summary>
+            Checks the response string.
+            </summary>
+            <returns>The response.</returns>
+            <param name="response">Response.</param>
+            <exception cref="T:System.Exception">
+            Represents errors that occur during application execution.
+            </exception>
+        </member>
+        <member name="T:SecSignID.AuthSession">
+            <summary>
+            Class which represents a mobile authentication session.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.NOSTATE">
+            <summary>
+            Constant NOSTATE. No State: Used when the session state is undefined.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.PENDING">
+            <summary>
+            Constant PENDING. Pending: The session is still pending for authentication.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.EXPIRED">
+            <summary>
+            Constant EXPIRED. Expired: The authentication timeout has been exceeded.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.ACCEPTED">
+            <summary>
+            Constant ACCEPTED. Accepted: The user was successfully authenticated.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.DENIED">
+            <summary>
+            Constant DENIED. Denied: The user denied this session.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.SUSPENDED">
+            <summary>
+            Constant SUSPENDED. Suspended: The server suspended this session for security reasons.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.CANCELED">
+            <summary>
+            Constant CANCELED. Canceled: The service has canceled or withdrawn this session.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.FETCHED">
+            <summary>
+            Constant FETCHED. This session was accepted and then fetched by the service. It can't be used anymore.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.INVALID">
+            <summary>
+            Constant FETCHED. This session has become invalid.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.secSignID">
+            <summary>
+            the secsign id the session has been craeted for
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.authSessionID">
+            <summary>
+            the session ID
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.requestingService">
+            <summary>
+            the name of the requesting service.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.requestingServiceAddress">
+            <summary>
+            Tthe address, a valid url, of the requesting service. this will be shown at the smartphone
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.requestID">
+            <summary>
+            the request ID is similar to a session ID.
+            it is generated after a authentication session has been created. all other request like dispose, withdraw or to get the auth session state
+            will be rejected if a request id is not specified.
+            </summary>
+        </member>
+        <member name="F:SecSignID.AuthSession.authSessionIconData">
+            <summary>
+            icon data of the so called access pass. the image data needs to be displayed otherwise the user does not know which access apss he needs to choose in order to accept the authentication session.
+            </summary>
+        </member>
+        <member name="M:SecSignID.AuthSession.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SecSignID.AuthSession" /> class.
+            </summary>
+            <param name="secSignID">the secsign id</param>
+            <param name="authSessionID">the auth session id</param>
+            <param name="requestID">the request id sent by the server</param>
+            <param name="requestName">the request name</param>
+            <param name="requestAddress">the request address or url</param>
+            <param name="base64EncdodedIconData">the base64 encoded png data of the access pass</param>
+        </member>
+        <member name="M:SecSignID.AuthSession.GetSecSignID">
+            <summary>
+            Gets the secsign id.
+            </summary>
+            <returns>
+            The sec signer ID.
+            </returns>
+        </member>
+        <member name="M:SecSignID.AuthSession.GetAuthSessionID">
+            <summary>
+            Gets the authsession ID.
+            </summary>
+            <returns>
+            The authsession ID.
+            </returns>
+        </member>
+        <member name="M:SecSignID.AuthSession.GetRequestingService">
+            <summary>
+            Gets the requesting service.
+            </summary>
+            <returns>
+            The requesting service.
+            </returns>
+        </member>
+        <member name="M:SecSignID.AuthSession.GetRequestingServiceAddress">
+            <summary>
+            Gets the requesting service address.
+            </summary>
+            <returns>
+            The requesting service address.
+            </returns>
+        </member>
+        <member name="M:SecSignID.AuthSession.GetRequestID">
+            <summary>
+            Gets the request ID.
+            </summary>
+            <returns>
+            The request ID.
+            </returns>
+        </member>
+        <member name="M:SecSignID.AuthSession.GetIconData">
+            <summary>
+            Gets the icon data which will be displayed in website.
+            </summary>
+            <returns>
+            The icon data.
+            </returns>
+        </member>
+        <member name="M:SecSignID.AuthSession.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents the current <see cref="T:SecSignID.AuthSession" />.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents the current <see cref="T:SecSignID.AuthSession" />.
+            </returns>
+        </member>
+    </members>
+</doc>
