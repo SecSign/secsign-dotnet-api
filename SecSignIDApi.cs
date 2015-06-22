@@ -1,9 +1,7 @@
-// $Id: SecSignIDApi.cs,v 1.4 2015/05/15 13:53:29 titus Exp $
-
 //
 // SecSign ID Api ASP.NET / C#
 //
-// (c) 2014 SecSign Technologies Inc.
+// (c) 2014, 2015 SecSign Technologies Inc.
 //
 
 using System;
@@ -13,210 +11,17 @@ using System.Net;
 
 using System.Reflection;
 
-[assembly: AssemblyVersion("1.0.2")]
+[assembly: AssemblyTitle("SecSign ID API .NET")]
+[assembly: AssemblyProduct("SecSign ID API .NET")]
+[assembly: AssemblyCompany("SecSign Technology Inc.")]
+[assembly: AssemblyCopyright("2015 SecSign Technology Inc.")]
+
+[assembly: AssemblyVersion("1.1.1")]
+[assembly: CLSCompliant(true)]
+//[assembly: AssemblyKeyFile(@"SecSignIDApiKey.snk")]
 
 namespace SecSignID
 {
-	/// <summary>
-	/// Class which represents a mobile authentication session.
-	/// </summary>
-	public sealed class AuthSession
-    {
-		/// <summary>
-		/// Constant NOSTATE. No State: Used when the session state is undefined. 
-		/// </summary>
-        public const int NOSTATE = 0;
-        
-        /// <summary>
-        /// Constant PENDING. Pending: The session is still pending for authentication.
-        /// </summary>
-        public const int PENDING = 1;
-        
-        /// <summary>
-        /// Constant EXPIRED. Expired: The authentication timeout has been exceeded.
-        /// </summary>
-        public const int EXPIRED = 2;
-        
-        /// <summary>
-        /// Constant ACCEPTED. Accepted: The user was successfully authenticated.
-        /// </summary>
-        public const int ACCEPTED = 3;
-        
-        /// <summary>
-        /// Constant DENIED. Denied: The user denied this session.
-        /// </summary>
-        public const int DENIED = 4;
-		
-        /// <summary>
-        /// Constant RETRACTED. Retracted: The server retracted this session for security reasons.
-        /// </summary>
-        public const int RETRACTED = 5;
-        
-        /// <summary>
-        /// Constant WITHDRAWN. Withdrawn: The service has withdrawn this session.
-        /// </summary>
-        public const int WITHDRAWN = 6;
-        
-        /// <summary>
-        /// Constant FETCHED. This session was accepted and then fetched by the service. It can't be used anymore.
-        /// </summary>
-        public const int FETCHED = 7;
-		
-		/// <summary>
-        /// Constant FETCHED. This session has become invalid.
-        /// </summary>
-        public const int INVALID = 8;
-		
-		
-		
-		 /// <summary>
-		 /// the secsign id the session has been craeted for
-		 /// </summary>
-        private string secSignID;
-        
-        /// <summary>
-        /// the session ID
-        /// </summary>
-        private string authSessionID;
-        
-        /// <summary>
-        /// the name of the requesting service.
-        /// </summary>
-        private string requestingService;
-		
-		/// <summary>
-		/// Tthe address, a valid url, of the requesting service. this will be shown at the smartphone
-		/// </summary>
-		private string requestingServiceAddress;
-        
-        /// <summary>
-        /// the request ID is similar to a session ID. 
-        /// it is generated after a authentication session has been created. all other request like dispose, withdraw or to get the auth session state
-        /// will be rejected if a request id is not specified.
-        /// </summary>
-        private string requestID;
-		
-		/// <summary>
-		/// icon data of the so called access pass. the image data needs to be displayed otherwise the user does not know which access apss he needs to choose in order to accept the authentication session.
-		/// </summary>
-		private string authSessionIconData;
-
-		
-		/// <summary>
-		/// Initializes a new instance of the <see cref="SecSignIDApi.AuthSession"/> class.
-		/// </summary>
-		/// <param name='secSignID'>the secsign id</param>
-		/// <param name='authSessionID'>the auth session id</param>
-		/// <param name='requestID'>the request id sent by the server</param>
-		/// <param name='requestName'>the request name</param>
-		/// <param name='requestAddress'>the request address or url</param>
-		public AuthSession(string secSignID, string authSessionID, string requestID, string requestName, string requestAddress, string base64EncdodedIconData)
-		{
-			if(secSignID == null || secSignID.Equals(""))
-			{
-				throw new System.ArgumentException("The SecSign ID must not be null.");
-			}
-			if(authSessionID == null || authSessionID.Equals(""))
-			{
-				throw new System.ArgumentException("The auth session ID must not be null.");
-			}
-			if(requestID == null || requestID.Equals(""))
-			{
-				throw new System.ArgumentException("The request ID must not be null.");
-			}
-			
-			this.secSignID = secSignID;
-			this.authSessionID = authSessionID;
-			this.requestID = requestID;
-			
-			this.requestingService = requestName;
-			this.requestingServiceAddress = requestAddress;
-			
-			this.authSessionIconData = base64EncdodedIconData;
-		}
-		
-		/// <summary>
-		/// Gets the secsign id.
-		/// </summary>
-		/// <returns>
-		/// The sec signer ID.
-		/// </returns>
-        public string GetSecSignID()
-        {
-            return this.secSignID;
-        }
-        
-        
-        /// <summary>
-        /// Gets the ticket ID.
-        /// </summary>
-        /// <returns>
-        /// The ticket ID.
-        /// </returns>
-        public string GetAuthSessionID()
-        {
-            return this.authSessionID;
-        }
-        
-        
-        /// <summary>
-        /// Gets the requesting service.
-        /// </summary>
-        /// <returns>
-        /// The requesting service.
-        /// </returns>
-        public string GetRequestingService()
-        {
-            return this.requestingService;
-        }
-		
-		/// <summary>
-        /// Gets the requesting service address.
-        /// </summary>
-        /// <returns>
-        /// The requesting service address.
-        /// </returns>
-        public string GetRequestingServiceAddress()
-        {
-            return this.requestingServiceAddress;
-        }
-        
-        
-        /// <summary>
-        /// Gets the request ID.
-        /// </summary>
-        /// <returns>
-        /// The request ID.
-        /// </returns>
-        public string GetRequestID()
-        {
-            return this.requestID;
-        }
-		
-		/// <summary>
-		/// Gets the icon data which will be displayed in website.
-		/// </summary>
-		/// <returns>
-		/// The icon data.
-		/// </returns>
-		public string GetIconData()
-        {
-            return this.authSessionIconData;
-        }
-        
-        
-        /// <summary>
-        /// Returns a <see cref="System.String"/> that represents the current <see cref="SecSignID.AuthSession"/>.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String"/> that represents the current <see cref="SecSignID.AuthSession"/>.
-        /// </returns>
-        override public string ToString()
-        {
-            return this.authSessionID + " (" + this.secSignID + ", " + this.requestingService + ", " + this.requestingServiceAddress + ")";
-        }
-	}
-	
 	/// <summary>
 	/// Class to connect to a SecSign ID server and request authentication sessions and status.
 	/// </summary>
@@ -245,34 +50,18 @@ namespace SecSignID
 		/// <summary>
 		/// The referer which is send to server.
 		/// </summary>
-		private string referer;
+		private string referer = "SecSignIDApi_.NET";
 		
 		/// <summary>
 		/// an optional plugin name.
 		/// </summary>
 		private string pluginName;
-		
-		/// <summary>
-		/// The version of this C# package.
-		/// </summary>
-		private string version;
-		
-		/// <summary>
-		/// cvs revision number
-		/// </summary>
-		private string revisionString = "$Revision: 1.4 $";
-		
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SecSignID.SecSignIDApi"/> class.
 		/// </summary>
 		public SecSignIDApi()
-		{
-			int firstSpace = this.revisionString.IndexOf(' ');
-			int lastSpace = this.revisionString.LastIndexOf(' ');
-			this.version = this.revisionString.Substring(firstSpace, lastSpace-firstSpace).Trim();
-			//this.referer = this.GetType().Name.ToString() + "_.NET";
-			this.referer = "SecSignIDApi_.NET";
-		}
+		{}
 		
 		/// <summary>
 		/// Sets an optional and additional name of the plugin.
@@ -296,10 +85,10 @@ namespace SecSignID
 		}
 		
 		/// <summary>
-		/// Requests the ticket to login.
+		/// Requests the authsession to login.
 		/// </summary>
 		/// <returns>
-		/// The ticket to login.
+		/// The authsession to login.
 		/// </returns>
 		/// <param name='secsignid'>the secsign id the auth session shall be created for.</param>
 		/// <param name='serviceName'>Service name which is displayed at users smartphone.</param>
@@ -463,7 +252,7 @@ namespace SecSignID
 		/// Actually a request is build and send to server.
 		/// </summary>
 		/// <returns>response of the server.</returns>
-		/// <param name='parameterString'>parameter string which is url encoded.</param>
+		/// <param name='parameterList'>parameter list which will be url encoded.</param>
 		private string SendRequest(Dictionary<string, string> parameterList)
 		{
 			string parameterString = "";
@@ -551,6 +340,207 @@ namespace SecSignID
 			}
 			return responseDict;
 		}
+	}
+	
+	/// <summary>
+	/// Class which represents a mobile authentication session.
+	/// </summary>
+	public sealed class AuthSession
+    {
+		/// <summary>
+		/// Constant NOSTATE. No State: Used when the session state is undefined. 
+		/// </summary>
+        public const int NOSTATE = 0;
+        
+        /// <summary>
+        /// Constant PENDING. Pending: The session is still pending for authentication.
+        /// </summary>
+        public const int PENDING = 1;
+        
+        /// <summary>
+        /// Constant EXPIRED. Expired: The authentication timeout has been exceeded.
+        /// </summary>
+        public const int EXPIRED = 2;
+        
+        /// <summary>
+        /// Constant ACCEPTED. Accepted: The user was successfully authenticated.
+        /// </summary>
+        public const int ACCEPTED = 3;
+        
+        /// <summary>
+        /// Constant DENIED. Denied: The user denied this session.
+        /// </summary>
+        public const int DENIED = 4;
+		
+        /// <summary>
+		/// Constant SUSPENDED. Suspended: The server suspended this session for security reasons.
+        /// </summary>
+        public const int SUSPENDED = 5;
+        
+        /// <summary>
+		/// Constant CANCELED. Canceled: The service has canceled or withdrawn this session.
+        /// </summary>
+		public const int CANCELED = 6;
+        
+        /// <summary>
+        /// Constant FETCHED. This session was accepted and then fetched by the service. It can't be used anymore.
+        /// </summary>
+        public const int FETCHED = 7;
+		
+		/// <summary>
+        /// Constant FETCHED. This session has become invalid.
+        /// </summary>
+        public const int INVALID = 8;
+		
+		
+		
+		 /// <summary>
+		 /// the secsign id the session has been craeted for
+		 /// </summary>
+        private string secSignID;
+        
+        /// <summary>
+        /// the session ID
+        /// </summary>
+        private string authSessionID;
+        
+        /// <summary>
+        /// the name of the requesting service.
+        /// </summary>
+        private string requestingService;
+		
+		/// <summary>
+		/// Tthe address, a valid url, of the requesting service. this will be shown at the smartphone
+		/// </summary>
+		private string requestingServiceAddress;
+        
+        /// <summary>
+        /// the request ID is similar to a session ID. 
+        /// it is generated after a authentication session has been created. all other request like dispose, withdraw or to get the auth session state
+        /// will be rejected if a request id is not specified.
+        /// </summary>
+        private string requestID;
+		
+		/// <summary>
+		/// icon data of the so called access pass. the image data needs to be displayed otherwise the user does not know which access apss he needs to choose in order to accept the authentication session.
+		/// </summary>
+		private string authSessionIconData;
+
+		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AuthSession"/> class.
+		/// </summary>
+		/// <param name='secSignID'>the secsign id</param>
+		/// <param name='authSessionID'>the auth session id</param>
+		/// <param name='requestID'>the request id sent by the server</param>
+		/// <param name='requestName'>the request name</param>
+		/// <param name='requestAddress'>the request address or url</param>
+		/// <param name='base64EncdodedIconData'>the base64 encoded png data of the access pass</param>
+		public AuthSession(string secSignID, string authSessionID, string requestID, string requestName, string requestAddress, string base64EncdodedIconData)
+		{
+			if(secSignID == null || secSignID.Equals(""))
+			{
+				throw new System.ArgumentException("The SecSign ID must not be null.");
+			}
+			if(authSessionID == null || authSessionID.Equals(""))
+			{
+				throw new System.ArgumentException("The auth session ID must not be null.");
+			}
+			if(requestID == null || requestID.Equals(""))
+			{
+				throw new System.ArgumentException("The request ID must not be null.");
+			}
+			
+			this.secSignID = secSignID;
+			this.authSessionID = authSessionID;
+			this.requestID = requestID;
+			
+			this.requestingService = requestName;
+			this.requestingServiceAddress = requestAddress;
+			
+			this.authSessionIconData = base64EncdodedIconData;
+		}
+		
+		/// <summary>
+		/// Gets the secsign id.
+		/// </summary>
+		/// <returns>
+		/// The sec signer ID.
+		/// </returns>
+        public string GetSecSignID()
+        {
+            return this.secSignID;
+        }
+        
+        
+        /// <summary>
+        /// Gets the authsession ID.
+        /// </summary>
+        /// <returns>
+        /// The authsession ID.
+        /// </returns>
+        public string GetAuthSessionID()
+        {
+            return this.authSessionID;
+        }
+        
+        
+        /// <summary>
+        /// Gets the requesting service.
+        /// </summary>
+        /// <returns>
+        /// The requesting service.
+        /// </returns>
+        public string GetRequestingService()
+        {
+            return this.requestingService;
+        }
+		
+		/// <summary>
+        /// Gets the requesting service address.
+        /// </summary>
+        /// <returns>
+        /// The requesting service address.
+        /// </returns>
+        public string GetRequestingServiceAddress()
+        {
+            return this.requestingServiceAddress;
+        }
+        
+        
+        /// <summary>
+        /// Gets the request ID.
+        /// </summary>
+        /// <returns>
+        /// The request ID.
+        /// </returns>
+        public string GetRequestID()
+        {
+            return this.requestID;
+        }
+		
+		/// <summary>
+		/// Gets the icon data which will be displayed in website.
+		/// </summary>
+		/// <returns>
+		/// The icon data.
+		/// </returns>
+		public string GetIconData()
+        {
+            return this.authSessionIconData;
+        }
+        
+        
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents the current <see cref="SecSignID.AuthSession"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents the current <see cref="SecSignID.AuthSession"/>.
+        /// </returns>
+        override public string ToString()
+        {
+            return this.authSessionID + " (" + this.secSignID + ", " + this.requestingService + ", " + this.requestingServiceAddress + ")";
+        }
 	}
 }
 
