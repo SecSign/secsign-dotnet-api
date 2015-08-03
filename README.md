@@ -18,7 +18,7 @@ This .NET API allows a secure login using a private key on a smart phone running
 
 
 Check out the included example `WebExample` to see how it works
-or visit <https://www.secsign.com> for more informations.
+or visit <https://www.secsign.com> for more information.
 
 **Files**
 
